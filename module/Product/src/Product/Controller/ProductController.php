@@ -21,7 +21,23 @@ class ProductController extends AbstractActionController {
 	
 	
 	public function editAction(){
-		
+		$id = $this->params('id');
+		$form = new ProductForm();
+		$product = new Product();
+		$objectManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+		$productData = $objectManager->getRepository('Product\Entity\Product')->find($id);
+		$form->bind($productData);
+		$request = $this->getRequest();
+		if ($request->isPost()) {
+			$form->setData($request->getPost());
+			if ($form->isValid()) {
+				$objectManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+				$objectManager->persist($product);
+				$objectManager->flush();
+				return $this->redirect()->toRoute('product');
+			}
+		}
+		return  array('product' => $productData , 'form' => $form, 'id' => $id);
 	}
 	
 	
@@ -37,11 +53,9 @@ class ProductController extends AbstractActionController {
 		if ($request->isPost()) {
 			$form->setData($request->getPost());
 			if ($form->isValid()) {
-		
 				$objectManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
 				$objectManager->persist($product);
 				$objectManager->flush();
-				// Redirect to list of tasks
 				return $this->redirect()->toRoute('product');
 			}
 		}

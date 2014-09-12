@@ -1,0 +1,38 @@
+<?php
+
+$title = 'Products';
+$this->headTitle($title);
+?>
+ <h1><?php echo $this->escapeHtml($title); ?></h1>
+
+ 
+ 
+ <table class="table">
+ <tr>
+     <th>Product</th>
+     <th>Price</th>
+     <th>Quantity</th>
+     <th>Sku</th>
+     <th>&nbsp;</th>
+ </tr>
+ <?php foreach ($product as $p): ?>
+ <tr>
+     <td>
+         <a href="<?php echo $this->url('product',
+             array('action'=>'edit', 'id' => $p->getId()));?>">
+             <?php echo $this->escapeHtml($p->getName()); ?></a>
+     </td>
+     
+     <td><?php echo $this->escapehtml($p->getPrice()); ?></td>
+     <td><?php echo $this->escapehtml($p->getQuantity()); ?></td>
+     <td><?php echo $this->escapehtml($p->getSku()); ?></td>
+     <td>
+     	 <a href="<?php echo $this->url('product',
+             array('action'=>'edit', 'id' => $p->getId()));?>">Edit</a>
+         <a href="<?php echo $this->url('product',
+             array('action'=>'delete', 'id' => $p->getId()));?>">Delete</a>
+     </td>
+ </tr>
+ <?php endforeach; ?>
+ </table>
+ 

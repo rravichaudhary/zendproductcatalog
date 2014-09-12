@@ -59,7 +59,7 @@ class ProductFilter extends InputFilter {
 				),
 		));
 		$this->add(array(
-				'name' => 'qunatity',
+				'name' => 'quantity',
 				'required' => true,
 				'filters' => array(
 						array('name' => 'StripTags'),

@@ -44,7 +44,7 @@ class ProductForm extends  Form {
 				)
 		));
 		$this->add(array(
-				'name' => 'qunatity',
+				'name' => 'quantity',
 				'type' => 'text',
 				'options' => array(
 						'label' => 'Qunatity',
