@@ -1,0 +1,33 @@
+<?php
+
+$title = 'Category';
+$this->headTitle($title);
+?>
+ <h1><?php echo $this->escapeHtml($title); ?></h1>
+
+ 
+ 
+ <table class="table">
+ <tr>
+     <th>Category</th>
+     <th>Status</th>
+     <th>&nbsp;</th>
+ </tr>
+ <?php foreach ($category as $c): ?>
+ <tr>
+     <td>
+         <a href="<?php echo $this->url('category',
+             array('action'=>'edit', 'id' => $c->getId()));?>">
+             <?php echo $this->escapeHtml($c->getName()); ?></a>
+     </td>
+     <td><?php echo $c->getStatus() ? 'Yes' : 'No'; ?></td>
+     <td>
+     	 <a href="<?php echo $this->url('category',
+             array('action'=>'edit', 'id' => $c->getId()));?>">Edit</a>
+         <a href="<?php echo $this->url('category',
+             array('action'=>'delete', 'id' => $c->getId()));?>">Delete</a>
+     </td>
+ </tr>
+ <?php endforeach; ?>
+ </table>
+ 
